@@ -1,0 +1,122 @@
+var _user$project$Main$initModel = {input: '', totalCalories: 0, errorMsg: ''};
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'AddCalorie':
+				var _p1 = _elm_lang$core$String$toInt(model.input);
+				if (_p1.ctor === 'Ok') {
+					return _elm_lang$core$Native_Utils.update(
+						model,
+						{totalCalories: model.totalCalories + _p1._0, errorMsg: ''});
+				} else {
+					return _elm_lang$core$Native_Utils.update(
+						model,
+						{errorMsg: 'Requires a Number'});
+				}
+			case 'Clear':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{totalCalories: 0, input: ''});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{input: _p0._0});
+		}
+	});
+var _user$project$Main$Model = F3(
+	function (a, b, c) {
+		return {input: a, totalCalories: b, errorMsg: c};
+	});
+var _user$project$Main$UserInput = function (a) {
+	return {ctor: 'UserInput', _0: a};
+};
+var _user$project$Main$Clear = {ctor: 'Clear'};
+var _user$project$Main$AddCalorie = {ctor: 'AddCalorie'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onInput(_user$project$Main$UserInput),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$value(model.input),
+						_1: {ctor: '[]'}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$h3,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'Total Calories: ',
+								_elm_lang$core$Basics$toString(model.totalCalories))),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$type_('button'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AddCalorie),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Add'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$type_('button'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$Clear),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text('Clear'),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$div,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(model.errorMsg),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		});
+};
+var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
+	{model: _user$project$Main$initModel, update: _user$project$Main$update, view: _user$project$Main$view})();
